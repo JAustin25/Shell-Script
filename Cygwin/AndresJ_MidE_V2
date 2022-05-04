@@ -1,0 +1,71 @@
+# Script Name: Operating System Laboratory Exam
+# By: Andres, John Austin T.
+# Date: 11/16/2020
+#================================================
+loop=y
+while [ "$loop" = y ]
+do
+clear
+tput cup 3 9; echo "Menu"
+tput cup 4 9; echo "============================"
+tput cup 5 9; echo "A: Determine if a number is divisible by 5."
+tput cup 6 9; echo "B: Show the total number of hidden and unhidden files."
+tput cup 7 9; echo "C: Exit"
+tput cup 8 9; echo "============================"
+tput cup 9 9; echo "Choice: " 
+tput cup 9 18; read choice || continue
+	case $choice in
+	[Aa])
+	
+	tput cup 11 9; echo "=============================" 
+	tput cup 12 9; echo "Enter a Number: "
+	tput cup 12 25; read Verify
+	
+	re='^[+-]?[0-9]+([.][0-9]+)?$'
+	if ! [[ $Verify =~ $re ]] ; then
+	tput cup 14 9; echo "NOTICE: Input is not a number."
+	else
+	
+	number=$Verify
+	
+	if (( $number % 5 == 0 ))
+	then	
+		tput cup 13 9; echo "=============================" 
+		tput cup 14 9; echo "[ number $number is divisible by 5. ]"
+		tput cup 15 9; echo ""
+	else
+		tput cup 13 9; echo "=============================" 
+		tput cup 14 9; echo "[ number $number is not divisible by 5. ]"
+		tput cup 15 9; echo ""
+	fi
+	
+	fi
+		 	
+	read -p "Please press 'Enter' to continue."
+	;;
+	
+	[Bb])
+
+	_mydir="$(pwd)"
+	
+	tput cup 11 9; echo "============================="	 	
+	TotalFilesCount="$(ls -a | wc -l)"
+	tput cup 12 9; echo "Current Directory: $_mydir"
+	tput cup 13 9; echo "Total Number of Files: $TotalFilesCount"
+	
+	unhiddenFiles="$(ls | wc -l)"
+	hiddenFiles="$(ls -a | egrep '^\.' | wc -l)"
+	tput cup 14 9; echo "============================="
+	tput cup 15 9; echo "Total Number of unhidden files: $unhiddenFiles"
+	tput cup 16 9; echo "Total Number of hidden files: $hiddenFiles"
+	tput cup 17 9; echo "============================="
+	tput cup 17 9; echo ""	
+	read -p "Please press 'Enter' to continue"
+	;;
+	
+	[Cc]) exit
+	;;	
+	
+	*) tput cup 12 9; echo "NOTICE: Invalid Input, Please press 'Enter' to continue."; read choice ;;
+esac
+done

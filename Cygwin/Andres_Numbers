@@ -1,0 +1,64 @@
+# Script Name: Menu
+# By: John Austin T. Andres
+# Date: 
+# Purpose: Menu Driven Script
+#================================================
+loop=y
+number=0
+while [ "$loop" = y ]
+do
+clear
+echo "Note: Default Number is 0"
+tput cup 3 9; echo "Menu"
+tput cup 4 9; echo "============================"
+tput cup 6 9; echo "A: Input Value"
+tput cup 7 9; echo "B: Determine whether the number is Positive or Negative."
+tput cup 8 9; echo "C: Determine whether the number is Even or Odd."
+tput cup 9 9; echo "D: Exit"
+tput cup 10 9; echo "Choice: " ; 
+tput cup 10 18; read choice || continue
+
+    case $choice in
+    [Aa])
+    tput cup 12 9; echo "=============================" 
+    tput cup 14 9; echo "Number: "
+    tput cup 14 18; read numberVerify
+    
+    re='^[+-]?[0-9]+([.][0-9]+)?$'
+    if ! [[ $numberVerify =~ $re ]] ; then
+    tput cup 15 9; echo "Error: User Input is not a number"
+    else
+    number=$numberVerify
+    fi
+    
+    tput cup 16 9; read -p "Press enter to continue" ;;
+    [Bb])
+    tput cup 12 9; echo "=============================" 
+        
+    if [ $number -lt 0 ]
+    then
+        tput cup 13 9; echo "$number is Negative Number"
+    elif [ $number -gt 0 ]
+    then
+        tput cup 13 9; echo "$number is Positive Number"
+    else
+        tput cup 13 9; echo "$number is Neither"
+    fi
+    tput cup 16 9; read -p "Press enter to continue" ;;
+    [Cc])
+    tput cup 12 9; echo "=============================" 
+        rem=$(( $number % 2 ))
+
+    if [ $rem -eq 0 ] 
+    then
+        tput cup 13 9; echo "$number is an Even Number"
+    else
+        tput cup 13 9; echo "$number is an Odd Number"
+    fi
+    
+    tput cup 16 9; read -p "Press enter to continue" ;;
+    [Dd]) exit;;
+    
+    *) tput cup 14 9; echo "Invalid Input"; read choice ;;
+esac
+done

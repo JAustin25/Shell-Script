@@ -1,0 +1,43 @@
+# Script Name: Menu
+# By: John Austin T. Andres
+# Date: 
+# Purpose: Menu Driven Script
+#================================================
+loop=y
+while [ "$loop" = y ]
+do
+clear
+tput cup 3 9; echo "Menu"
+tput cup 4 9; echo "=================================="
+tput cup 5 9; echo "A: List the files in current working directory."
+tput cup 6 9; echo "B: Display the Calendar this month."
+tput cup 7 9; echo "C: Display the date today."
+tput cup 8 9; echo "D: Display the current working directory."
+tput cup 9 9; echo "E: Exit"
+tput cup 10 9; echo "=================================="
+tput cup 11 9; echo "Choice: " ; 
+tput cup 11 18; read choice || continue
+	case $choice in
+	[Aa])
+        dir=$(dir) 
+	tput cup 13 11; echo "Files: $dir"
+	read -p "Press enter to continue"
+	read choice ;;
+	[Bb])
+	echo "$(cal)"	 
+	read -p "Press enter to continue"
+	read choice ;;
+	[Cc]) 
+	current_date=$(date)
+	tput cup 13 9; echo "Current Date: $current_date"
+	read -p "Press enter to continue"
+	read choice ;;	
+	[Dd]) 
+	_mydir="$(pwd)"
+	tput cup 13 9; echo "Current Working Directory: $_mydir"
+	read -p "Press enter to continue"
+	read choice ;;
+	[Ee]) exit;;	
+	*) tput cup 14 4; echo "Invalid Input"; read choice ;;
+esac
+done

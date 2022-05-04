@@ -1,0 +1,31 @@
+# Script Name: Menu
+# By: John Austin T. Andres (BSCS 2) (CS212L)
+# Date: 16/12/2020
+# Purpose: Menu Driven Script
+#================================================
+corporatePhones=~/source/phmenu
+loop=y
+while [ "$loop" = y ]
+do
+clear
+tput cup 4 9; echo "Menu by John Austin T. Andres (BSCS 2)"
+tput cup 5 9; echo "                CS212L                "
+tput cup 6 9; echo "======================================"
+tput cup 7 9; echo "A. Menu - (cal, date etc.)"
+tput cup 8 9; echo "B. CorporatePhones"
+tput cup 9 9; echo "C. Positive/Negative (Odd/Even)"
+tput cup 10 9; echo "D. Midterm Exam"
+tput cup 11 9; echo "E. Exit"
+tput cup 12 9; echo "====================================="
+tput cup 13 9; echo "Choice: " ; 
+tput cup 13 18; read choice || continue
+    case $choice in
+    [Aa]) ./Andres_Menu ;;
+    [Bb]) ./phmenu ;;
+    [Cc]) ./Andres_Numbers ;;
+    [Dd]) ./AndresJ_MidE_V2 ;;
+    [Ee]) exit;;    
+
+    *) tput cup 14 9; echo "Invalid Input, Please try again."; read choice ;;
+esac
+done
